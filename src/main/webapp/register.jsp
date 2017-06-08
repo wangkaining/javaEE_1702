@@ -1,7 +1,5 @@
-<%@ page import="java.sql.Driver" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.PreparedStatement" %><%--
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.sql.*" %><%--
   Created by IntelliJ IDEA.
   User: 王凯宁
   Date: 2017/6/7
@@ -21,17 +19,46 @@
     out.print(mobile);
     String password=request.getParameter("password");
     out.print(password);
+    // TODO: 2017/6/8 验证 nick password 是否存在
+    String[] hobbies =request.getParameterValues("hobbies");
+    String[] cities =request.getParameterValues("cities");
+
+    System.out.println("hobbies: "+ Arrays.toString(hobbies));
+    System.out.println("cities: "+Arrays.toString(cities));
     new com.mysql.jdbc.Driver();
     Connection connection = DriverManager.getConnection("jdbc:mysql:///?user=root&password=wang");
-    String sql= "INSERT INTO db_javaee.user VALUE (null,?,?,?)";
-    PreparedStatement statement =connection.prepareStatement(sql);
+
+    String sqlnick ="SELECT * FROM db_javaee.user WHERE nick = ?";
+    PreparedStatement statement=connection.prepareStatement(sqlnick);
     statement.setString(1,nick);
-    statement.setString(2,mobile);
-    statement.setString(3,password);
-    statement.executeUpdate();
+    ResultSet resultSet =statement.executeQuery();
+    boolean isnickExist =resultSet.next();
+    String sqlMobile = "SELECT * FROM db_javaee.user WHERE mobile = ?";
+    statement = connection.prepareStatement(sqlMobile);
+    statement.setString(1,mobile);
+    resultSet =statement.executeQuery();
+    boolean isMobileExist =resultSet.next();
+
+    if (isnickExist) {
+        request.setAttribute("message","昵称已经存在");
+        request.getRequestDispatcher("signup.jsp").forward(request, response);
+    } else if (isMobileExist) {
+        request.setAttribute("message", "手机号已经存在");
+        request.getRequestDispatcher("signup.jsp").forward(request, response);
+    } else {
+
+
+        String sql = "INSERT INTO db_javaee.user VALUE (NULL,?,?,?)";
+        statement = connection.prepareStatement(sql);
+        statement.setString(1, nick);
+        statement.setString(2, mobile);
+        statement.setString(3, password);
+        statement.executeUpdate();
+        response.sendRedirect("index.jsp");
+    }
     statement.close();
     connection.close();
-    response.sendRedirect("test.jsp");
+    resultSet.close();
 
 %>
 </body>

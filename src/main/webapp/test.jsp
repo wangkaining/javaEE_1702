@@ -12,12 +12,20 @@
 </head>
 <body>
 
-<form action="login.jsp">
+<form action="login.jsp" method="post">
     <input type="text" name="mobile" placeholder="邮箱"><br>
     <input type="password" name="password" placeholder="密码"><br>
-    <input type="submit" value="登陆">
+    <input type="submit" value="登录">
 </form>
-<p><%=request.getAttribute("message")%></p>
+<%--<p><%=request.getAttribute("message")%></p>--%>
+<p>
+    <%
+        String message = (String) request.getAttribute("message");
+        if (message != null) {
+            out.print(message);
+        }
+    %>
+</p>
 <a href="signup.jsp">注册</a>
 </body>
 </html>

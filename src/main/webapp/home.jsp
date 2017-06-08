@@ -11,6 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-
+<p>主页欢迎<%=session.getId()%></p>
+<a href="second.jsp">第二页</a>
+<%=session.getAttribute("nick")%>
+<%--<p><%=request.getAttribute("nick")%></p>--%>
+<%
+    pageContext.setAttribute("key","value");
+    application.setAttribute("app-key","app-value");
+%>
+<%=pageContext.getAttribute("key")%>
+<%=application.getAttribute("app-key")%>
+<p><a href="logout.jsp">注销</a></p>
 </body>
 </html>

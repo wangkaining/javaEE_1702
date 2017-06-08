@@ -28,14 +28,19 @@
     ResultSet resultSet=statement.executeQuery();
     if (resultSet.next()) {
         // success
-        response.sendRedirect("home.jsp");  // redirect  重定向
+//        System.out.println(resultSet.getString("nick"));
+        session.setAttribute("nick", resultSet.getString("nick"));
+//        response.sendRedirect("home.jsp");  // redirect  重定向
+        request.getRequestDispatcher("home.jsp").forward(request,response);
     } else {
         // failed
 //        response.sendRedirect("test.jsp"); // redirect  重定向  地址栏 地址有变化
         request.setAttribute("message","用户名或密码错误");
         request.getRequestDispatcher("test.jsp").forward(request,response); // forward  转发   地址栏地址没有发生变化
     }
-
+    resultSet.close();
+    statement.close();
+    connection.close();
 
 
 
