@@ -11,12 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-<form action="register.jsp">
-    <input type="text" placeholder="邮箱"><br>
-    <input type="password" placeholder="密码"><br>
+
+<form action="login.jsp">
+    <input type="text" name="mobile" placeholder="邮箱"><br>
+    <input type="password" name="password" placeholder="密码"><br>
     <input type="submit" value="登陆">
 </form>
+<p><%=request.getAttribute("message")%></p>
 <a href="signup.jsp">注册</a>
-
 </body>
 </html>
