@@ -12,8 +12,8 @@
 </head>
 <body>
 <%
-    session.invalidate();
-    response.sendRedirect("index.jsp");
+    session.invalidate(); //注销  删除数据
+    response.sendRedirect("index.jsp"); //重定向到index
 %>
 
 </body>

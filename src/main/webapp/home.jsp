@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
+<%
+    if (session.getAttribute("nick") == null) {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <p>主页欢迎<%=session.getId()%></p>
 <a href="second.jsp">第二页</a>
 <%=session.getAttribute("nick")%>

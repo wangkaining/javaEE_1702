@@ -9,9 +9,12 @@ CREATE TABLE db_javaee.user (
   mobile   VARCHAR(255) NOT NULL UNIQUE
   COMMENT '手机号',
   password VARCHAR(255) NOT NULL
-  COMMENT '密码'
+  COMMENT '密码',
+  hobbies VARCHAR(255) COMMENT '爱好',
+  cities VARCHAR(255) COMMENT '地址'
 )
   COMMENT '用户表';
+
+
 SELECT *
-FROM db_javaee.user
-WHERE mobile = ? AND password = ?;
+FROM db_javaee.user;

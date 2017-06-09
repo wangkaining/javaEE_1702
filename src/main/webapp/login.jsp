@@ -30,8 +30,8 @@
         // success
 //        System.out.println(resultSet.getString("nick"));
         session.setAttribute("nick", resultSet.getString("nick"));
-//        response.sendRedirect("home.jsp");  // redirect  重定向
-        request.getRequestDispatcher("home.jsp").forward(request,response);
+        response.sendRedirect("home.jsp");  // redirect  重定向 不能保存request 范围内的属性
+//        request.getRequestDispatcher("home.jsp").forward(request,response);
     } else {
         // failed
 //        response.sendRedirect("test.jsp"); // redirect  重定向  地址栏 地址有变化
