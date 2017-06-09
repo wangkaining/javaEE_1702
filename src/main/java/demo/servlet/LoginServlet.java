@@ -36,10 +36,10 @@ public class LoginServlet extends HttpServlet {
             }
             statement.setString(1, mobile);
             statement.setString(2, password);
-           resultSet = statement.executeQuery();
+            resultSet = statement.executeQuery();
             if (resultSet.next()) {
-               req.getSession().setAttribute("nick", resultSet.getString("nick"));
-               req.getRequestDispatcher("home.jsp").forward(req,resp);  // redirect  重定向 不能保存request 范围内的属性
+                req.getSession().setAttribute("nick", resultSet.getString("nick"));
+                req.getRequestDispatcher("home.jsp").forward(req, resp);  // redirect  重定向 不能保存request 范围内的属性
 
             } else {
 
@@ -49,8 +49,8 @@ public class LoginServlet extends HttpServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            Db.close(resultSet,statement,connection);
+        } finally {
+            Db.close(resultSet, statement, connection);
         }
     }
 }
