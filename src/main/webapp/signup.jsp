@@ -11,14 +11,14 @@
     <title>sign up page</title>
 </head>
 <body>
-<form action="register.jsp" method="post">
+<form action="register" method="post">
     <input type="text" name="nick" placeholder="昵称"><br>
     <input type="text" name="mobile" placeholder="手机号"><br>
     <input type="password" name="password" placeholder="密码"><br>
     hobbies:
-    <input type="checkbox"name="hobbies"value="TV">TV
-    <input type="checkbox"name="hobbies"value="Movie">Movie
-    <input type="checkbox"name="hobbies"value="Game">Game<br>
+    <input type="checkbox" name="hobbies" value="TV">TV
+    <input type="checkbox" name="hobbies" value="Movie">Movie
+    <input type="checkbox" name="hobbies" value="Game">Game<br>
     cities:
     <select name="cities" multiple>
         <option value="Beijing">Beijing</option>
