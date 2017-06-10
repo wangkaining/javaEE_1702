@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
 
                 statement = connection.prepareStatement(sql);
             } else {
+                req.setAttribute("message","网络异常，请重新登录");
+                req.getRequestDispatcher("index.jsp").forward(req,resp);
                 return;
             }
             statement.setString(1, mobile);
