@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <body>
-<form action="login" method="post">  <%-- 这段话 是 地址栏不显示密码  --%>
+
+<form action="user" method="post"><%-- 这段话 是 地址栏不显示密码  --%>
+  <input type="hidden" name="action" value="login">
   <input type="text" name="mobile" placeholder="邮箱"><br>  <%-- 用户登录用户名 或者说是 邮箱  --%>
   <input type="password" name="password" placeholder="密码"><br><%-- 用户登录密码 --%>
   <input type="submit" value="登录"> <%-- 登陆按钮 --%>

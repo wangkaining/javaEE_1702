@@ -6,13 +6,13 @@
     <!-- eXtension Markup Language -->
     <!-- 配置一个 servlet-->
     <!--1.注册一个servlet -->
-    <servlet>
-        <servlet-name>register</servlet-name>
-        <servlet-class>demo.servlet.RegisterServlet</servlet-class>
-    </servlet>
-    <!--2. 映射一个 servlet -->
-    <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
+    <!--<servlet>-->
+        <!--<servlet-name>register</servlet-name>-->
+        <!--<servlet-class>demo.servlet.RegisterServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--&lt;!&ndash;2. 映射一个 servlet &ndash;&gt;-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>register</servlet-name>-->
+        <!--<url-pattern>/register</url-pattern>-->
+    <!--</servlet-mapping>-->
 </web-app>
