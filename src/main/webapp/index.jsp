@@ -1,29 +1,73 @@
-<%--
+<%@ page import="demo.model.Student" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.ResultSet" %><%--
   Created by IntelliJ IDEA.
   User: 王凯宁
-  Date: 2017/6/6
-  Time: 11:01
+  Date: 2017/6/7
+  Time: 15:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
+<head>
+    <title>Title</title>
+    <script>
+        function del() {
+            return confirm('DEL?');
+        }
+    </script>
+</head>
 <body>
-
-<form action="user" method="post"><%-- 这段话 是 地址栏不显示密码  --%>
-  <input type="hidden" name="action" value="login">
-  <input type="text" name="mobile" placeholder="邮箱"><br>  <%-- 用户登录用户名 或者说是 邮箱  --%>
-  <input type="password" name="password" placeholder="密码"><br><%-- 用户登录密码 --%>
-  <input type="submit" value="登录"> <%-- 登陆按钮 --%>
-</form>
-<%--<p><%=request.getAttribute("message")%></p>--%> <%--  表达式  某一隐式对象调用某一个方法能返回一个值就可以用动作表达式--%>
-<p>
-  <%
-    String message = (String) request.getAttribute("message");
-    if (message != null) {
-      out.print(message);
+<%
+    if (session.getAttribute("nick") == null) {
+        response.sendRedirect("default.jsp");
     }
-  %>
-</p>
-<a href="signup.jsp">注册</a>
-  </body>
+%>
+<c:if test="${sessionScope.nick eq null}">
+    <c:redirect url="index.jsp"/>
+</c:if>
+<h1>主页</h1>
+<p>${sessionScope.nick}</p>
+<p><a href="user?action=logout">注销</a></p>
+<hr>
+<form action="student" method="post">
+    <input type="hidden" name="action" value="add">
+    <input type="text" name="name" placeholder="姓名"><br>
+    <input type="text" name="gender" placeholder="性别"><br>
+    <input type="date" name="dob" placeholder="出生日期"><br>
+    <input type="submit" value="添加">
+</form>
+<hr>
+<table border="1">
+    <c:choose>
+     <c:when test="${fn:length(sessionScope.students)== 0}">
+         当前没有记录
+     </c:when>
+        <c:otherwise>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>出生日期</th>
+                <th colspan="2">操作</th>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+
+    <c:forEach var="student" items="${sessionScope.students}" varStatus="vs">
+        <tr>
+            <td>${vs.count}</td>
+            <td>${student.name}</td>
+            <td>${student.gender}</td>
+            <td>${student.dob}</td>
+            <td><a href="student?action=queryById&id=${student.id}">编辑</a></td>
+            <td><a href="student?action=remove&id=${student.id}" onclick="return del()">删除</a></td>
+        </tr>
+    </c:forEach>
+</table>
+<hr>
+${requestScope.message}
+</body>
 </html>
